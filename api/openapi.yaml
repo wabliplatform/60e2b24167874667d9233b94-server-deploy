@@ -1,0 +1,144 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: lampralexandros@gmail.com
+  description: This is a sample openApi document
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://wabli.netlify.app/
+  title: TempApi
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- description: solid-spoon
+  url: http://83.212.100.226:3001/v1
+security:
+- {}
+tags:
+- description: not yet ready
+  name: prod
+paths:
+  /prod:
+    post:
+      operationId: createprod
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/prod'
+        description: data to be created
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/prod'
+          description: successful operation
+      summary: Creates the data
+      tags:
+      - prod
+      x-eov-operation-handler: controllers/ProdController
+  /prod/{prodId}:
+    delete:
+      operationId: deleteprod
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: prodId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: successful operation
+      summary: Delete the element
+      tags:
+      - prod
+      x-eov-operation-handler: controllers/ProdController
+    get:
+      operationId: getprod
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: prodId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/prod'
+          description: successful operation
+      summary: Get the element
+      tags:
+      - prod
+      x-eov-operation-handler: controllers/ProdController
+    put:
+      operationId: updateprod
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: prodId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/prod'
+        description: data to be updated
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/prod'
+          description: successful operation
+      summary: Updates the element
+      tags:
+      - prod
+      x-eov-operation-handler: controllers/ProdController
+  /prod/getAll:
+    get:
+      operationId: getAllprod
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/prod'
+                type: array
+          description: successful operation
+      summary: Get all the data
+      tags:
+      - prod
+      x-method-getAll: "true"
+      x-eov-operation-handler: controllers/ProdController
+components:
+  schemas:
+    prod:
+      example:
+        _id: _id
+        text: text
+      properties:
+        _id:
+          type: string
+        text:
+          type: string
+      required:
+      - text
+      type: object
